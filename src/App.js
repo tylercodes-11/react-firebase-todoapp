@@ -1,20 +1,25 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
 import Login from "./Login";
+import TodoPage from "./TodoPage";
+import { AuthContextProvider } from './context/AuthContext'
+
+
 
 
 function App() {
 ////////////////////////////////
   return (
-//making router for login and todo page
+//making routes for login and todo page
     <div>
-      <Router>
-        {/* <AuthProvider> */
+   
+        <AuthContextProvider> 
         <Routes>
-          <Route path="/" component={Login} />
-          </Routes>}
-
-      </Router>
+          <Route path="/" element={<Login />} />
+          <Route path="/todos" element={<TodoPage />} />
+          </Routes>
+         </AuthContextProvider>
+      
 
 
     </div>

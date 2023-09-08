@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import {AiOutlinePlus} from 'react-icons/ai';
 import Todo from './Todo';
 import {db} from './firebase'
+import { UserAuth } from "./context/AuthContext";
 import {query,collection, onSnapshot, updateDoc, doc, addDoc, deleteDoc} from 'firebase/firestore';
 
 const style = {
@@ -14,9 +15,18 @@ const style = {
   count: `text-center p-2`,
 }
 function TodoPage() {
+const {logout} = UserAuth();
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState('');
 
+  //signout handle
+const handleSignOut = async () => {
+    try {
+        await logout()
+    } catch (err) {
+        console.log(err)
+}
+}
 
 //create todo
 
@@ -66,6 +76,9 @@ const deleteTodo = async (id) => {
   return (
 
     <div className={style.bg}>
+        {/* make logout out nav bar */}
+        {/*  */}
+        {/*  */}
       <div className={style.container}>
         <h3 className={style.heading}>Todo App</h3>
         <form onSubmit={createTodo} className={style.form}>
