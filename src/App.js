@@ -16,7 +16,8 @@ const style = {
 function App() {
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState('');
-  console.log();
+
+
 //create todo
 
 const createTodo = async (e) => {
@@ -80,7 +81,8 @@ const toggleComplete = async (todo) => {
           ))}
 
           </ul>
-          <p className={style.count}> You have {todos.length} todos</p>
+          {todos.length < 1 ? null :  <p className={style.count}> You have {todos.length} todos</p> }
+        
           
       </div>
       
