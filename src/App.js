@@ -23,7 +23,7 @@ const createTodo = async (e) => {
   e.preventDefault(); // prevent reload
   if(input === '') {
     alert('Please enter a todo item into the input field')
-    return
+    return;
   }
   await addDoc(collection(db, 'todos'), {
     text:input,
@@ -32,7 +32,7 @@ const createTodo = async (e) => {
   setInput('');
 }; 
 
-////////////////////////////////
+//read todo in firebase
 useEffect(() => {
   const q = query(collection(db,'todos'))
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -41,11 +41,11 @@ useEffect(() => {
       todosArr.push({...doc.data(), id: doc.id})
     });
     setTodos(todosArr)
-  })
+  });
   return () => unsubscribe();
-})
+}, []);
 
-//read todo in firebase
+
 //update todo in firebase
 const toggleComplete = async (todo) => {
   await updateDoc(doc(db, 'todos', todo.id), {
