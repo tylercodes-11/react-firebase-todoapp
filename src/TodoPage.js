@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import { Navigate } from 'react-router-dom'
 import {AiOutlinePlus} from 'react-icons/ai';
 import Todo from './Todo';
 import {db} from './firebase'
@@ -7,6 +8,7 @@ import {query,collection, onSnapshot, updateDoc, doc, addDoc, deleteDoc} from 'f
 
 const style = {
   bg: `h-screen w-screen p-4 bg-gradient-to-r from-[#2F80ED] to-[#1CB5E0]`, 
+  logout: `bg-white cursor-pointer text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow`,
   container: `bg-slate-100 max-w-[500px] w-full m-auto rounded-md shadow-xl p-4`,
   heading: `text-3xl font-bold text-center text-gray-800 p-2`,
   form: `flex rounded-md justify-between`,
@@ -15,7 +17,7 @@ const style = {
   count: `text-center p-2`,
 }
 function TodoPage() {
-const {logout} = UserAuth();
+const {logout, user} = UserAuth();
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState('');
 
@@ -28,7 +30,7 @@ const handleSignOut = async () => {
 }
 }
 
-//create todo
+//if no user is logged in
 
 const createTodo = async (e) => {
   e.preventDefault(); // prevent reload
@@ -79,7 +81,10 @@ const deleteTodo = async (id) => {
         {/* make logout out nav bar */}
         {/*  */}
         {/*  */}
+        <div onClick={handleSignOut} className={style.logout}>
+           Logout
       <div className={style.container}>
+   
         <h3 className={style.heading}>Todo App</h3>
         <form onSubmit={createTodo} className={style.form}>
           <input 
@@ -103,6 +108,7 @@ const deleteTodo = async (id) => {
           </ul>
           {todos.length < 1 ? null :  <p className={style.count}> You have {todos.length} todos</p> }
         
+        </div>
           
       </div>
       

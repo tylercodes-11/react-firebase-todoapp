@@ -1,5 +1,5 @@
 import {React, useEffect } from "react";
-import GoogleOutlined from '@ant-design/icons';
+import {GoogleOutlined} from '@ant-design/icons';
 import { UserAuth} from "./context/AuthContext";
 import {useNavigate} from 'react-router-dom';
 
@@ -21,6 +21,8 @@ const Login = () => {
     useEffect(() => {
         if (user != null) {
             navigate('/todos');
+        } else {
+            navigate('/');
         }
     },[user])
 
@@ -30,7 +32,7 @@ const Login = () => {
     <div className="ma-w-[240px] m-auto py-4">
         
             
-        <GoogleOutlined onClick={handleGoogleSignIn}/> Sign in with Google
+        <GoogleOutlined onClick={handleGoogleSignIn} /> Sign in with Google 
     </div>
     </div>
     );
