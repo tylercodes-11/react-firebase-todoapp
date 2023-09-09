@@ -34,21 +34,29 @@ const handleSignOut = async () => {
 
 
 const createTodo = async (e) => {
+
+
+  const  uid = await user.uid;
+
   e.preventDefault(); // prevent reload
   if(input === '') {
     alert('Please enter a todo item into the input field')
     return;
   }
-  await addDoc(collection(db, 'todos'), {
+   await addDoc(collection(db,'userData', uid, 'todos'),{
     text:input,
     completed: false,
-  })
+  });
   setInput('');
 }; 
 
 //read todo in firebase
-useEffect(() => {
-  const q = query(collection(db,'todos'))
+useEffect( () => {
+
+const  uid =  user.uid;
+
+  const q = query(collection(db,'userData', uid, 'todos'));
+
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
     let todosArr = []
     querySnapshot.forEach((doc) => {
