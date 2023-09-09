@@ -17,18 +17,19 @@ const style = {
   count: `text-center p-2`,
 }
 function TodoPage() {
-const {logout, user} = UserAuth();
+  const {logOut, user} = UserAuth();
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState('');
 
   //signout handle
 const handleSignOut = async () => {
     try {
-        await logout()
+        await logOut();
     } catch (err) {
         console.log(err)
+        console.log(user);
 }
-}
+};
 
 //if no user is logged in
 

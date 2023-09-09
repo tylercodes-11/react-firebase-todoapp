@@ -19,7 +19,12 @@ export const AuthContextProvider = ({children}) => {
         } 
 
         const logOut = () => {
-            signOut(auth)
+            signOut(auth).then(() => {
+                // Sign-out successful.
+              }).catch((error) => {
+                console.log(error);
+                // An error happened.
+              });
         }
 
         useEffect(()=> {
