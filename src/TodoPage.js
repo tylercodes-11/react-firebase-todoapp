@@ -4,7 +4,7 @@ import {AiOutlinePlus} from 'react-icons/ai';
 import Todo from './Todo';
 import {db} from './firebase'
 import { UserAuth } from "./context/AuthContext";
-import {query,collection, where, getDoc, onSnapshot, updateDoc, doc, addDoc, deleteDoc, QuerySnapshot} from 'firebase/firestore';
+import {query,collection, where, getDoc, setDoc, onSnapshot, updateDoc, doc, addDoc, deleteDoc, QuerySnapshot} from 'firebase/firestore';
 
 const style = {
   bg: `h-screen w-screen p-4 bg-gradient-to-r from-[#2F80ED] to-[#1CB5E0]`, 
@@ -21,6 +21,8 @@ function TodoPage() {
   const {logOut, user} = UserAuth();
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState('');
+  const [userdata, setuserdata] = useState(null);
+
 
   //signout handle
 const handleSignOut = async () => {
@@ -43,7 +45,7 @@ const createTodo = async (e) => {
     alert('Please enter a todo item into the input field')
     return;
   }
-   await addDoc(collection(db,'userData', uid, 'todos'),{
+   await setDoc(collection(db,'userData', uid, 'todos'),{
     text:input,
     completed: false,
   });
@@ -54,7 +56,8 @@ const createTodo = async (e) => {
 
 useEffect( () => {
     const getData = async () => {
-        const  uid = await user.uid;
+        
+        const  uid = await user.uid; //from context of user object
     console.log(uid);
     
         const q = await query(collection(db,'userData', uid, 'todos'));
@@ -69,10 +72,11 @@ useEffect( () => {
     }
        getData();
 
-    // Create a query against the collection.
-   
+    
+   return () => {
+    if(user.id===!null) return
        
-      
+   }
     
     }, [user.uid]);
 
