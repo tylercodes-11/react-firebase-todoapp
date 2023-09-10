@@ -4,7 +4,7 @@ import {AiOutlinePlus} from 'react-icons/ai';
 import Todo from './Todo';
 import {db} from './firebase'
 import { UserAuth } from "./context/AuthContext";
-import {query,collection, onSnapshot, updateDoc, doc, addDoc, deleteDoc} from 'firebase/firestore';
+import {query,collection, where, getDoc, onSnapshot, updateDoc, doc, addDoc, deleteDoc, QuerySnapshot} from 'firebase/firestore';
 
 const style = {
   bg: `h-screen w-screen p-4 bg-gradient-to-r from-[#2F80ED] to-[#1CB5E0]`, 
@@ -51,26 +51,37 @@ const createTodo = async (e) => {
 }; 
 
 //read todo in firebase
+
 useEffect( () => {
+    const getData = async () => {
+        const  uid = await user.uid;
+    console.log(uid);
+    
+        const q = await query(collection(db,'userData', uid, 'todos'));
+        const  unsubscribe =   onSnapshot(q, (querySnapshot) => {
+            let todosArr = [];
+            querySnapshot.forEach((doc) => {
+              todosArr.push({...doc.data(), id: doc.id})
+            });
+            setTodos(todosArr)
+          });
+          return () => unsubscribe();
+    }
+       getData();
 
-const  uid =  user.uid;
-
-  const q = query(collection(db,'userData', uid, 'todos'));
-
-  const unsubscribe = onSnapshot(q, (querySnapshot) => {
-    let todosArr = []
-    querySnapshot.forEach((doc) => {
-      todosArr.push({...doc.data(), id: doc.id})
-    });
-    setTodos(todosArr)
-  });
-  return () => unsubscribe();
-}, []);
+    // Create a query against the collection.
+   
+       
+      
+    
+    }, [user.uid]);
 
 
 //update todo in firebase
 const toggleComplete = async (todo) => {
-  await updateDoc(doc(db, 'todos', todo.id), {
+    const  uid =  user.uid;
+
+  await updateDoc(doc(db,'userData', uid, 'todos', todo.id), {
     completed: !todo.completed
   });
 
@@ -79,7 +90,9 @@ const toggleComplete = async (todo) => {
 
 //delete todo in firebase
 const deleteTodo = async (id) => {
-  await deleteDoc(doc(db, 'todos', id))
+    const  uid =  user.uid;
+
+  await deleteDoc(doc(db, 'userData', uid, 'todos', id))
 }
 
 
