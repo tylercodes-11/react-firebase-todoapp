@@ -45,7 +45,7 @@ const createTodo = async (e) => {
     alert('Please enter a todo item into the input field')
     return;
   }
-   await setDoc(collection(db,'userData', uid, 'todos'),{
+   await addDoc(collection(db,'userData', uid, 'todos'),{
     text:input,
     completed: false,
   });
