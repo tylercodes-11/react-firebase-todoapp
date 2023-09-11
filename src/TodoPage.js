@@ -76,7 +76,6 @@ useEffect(() => {
     getData();
   
     return () => {
-      // You may not need this part depending on your use case
       if (user?.uid === null) return;
     };
   }, [user]);
@@ -110,12 +109,12 @@ const deleteTodo = async (id) => {
         {/*  */}
         {/*  */}
       
-           <img onClick={handleSignOut} className={style.profile} src={user.photoURL} alt="profile-pic"></img> 
+           <img onClick={handleSignOut} className={style.profile} src={user.photoURL} alt="Account Photo"></img> 
         
 
       <div className={style.container}>
    
-        <h3 className={style.heading}>Todo App</h3>
+        <h3 className={style.heading}>Todo List</h3>
         <form onSubmit={createTodo} className={style.form}>
           <input 
           value={input} 

@@ -34,7 +34,7 @@ const Login = () => {
     {/* form container */}
     
           <div className="md:w-1/2 px-16">
-          <h2 className="font-bold text-3xl mb-10">Welcome to the Todo App</h2> 
+          <h2 className="font-bold text-3xl mb-10">Welcome to Todo Pro</h2> 
 
            {/*  */}
          <button className="bg-white border py-2 px-3 w-full rounded-xl mt-7 flex justify-center items-center text-m"  onClick={handleGoogleSignIn}>
