@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from "react";
-import { Navigate } from 'react-router-dom'
 import {AiOutlinePlus} from 'react-icons/ai';
 import Todo from './Todo';
 import {db} from './firebase'
 import { UserAuth } from "./context/AuthContext";
-import {query,collection, where, getDoc, setDoc, onSnapshot, updateDoc, doc, addDoc, deleteDoc, QuerySnapshot} from 'firebase/firestore';
+import {query,collection, onSnapshot, updateDoc, doc, addDoc, deleteDoc, } from 'firebase/firestore';
 
 const style = {
   bg: `h-screen w-screen p-4 bg-gradient-to-r from-[#2F80ED] to-[#1CB5E0]`, 
@@ -21,7 +20,6 @@ function TodoPage() {
   const {logOut, user} = UserAuth();
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState('');
-  const [userdata, setuserdata] = useState(null);
 
 
   //signout handle
@@ -54,31 +52,35 @@ const createTodo = async (e) => {
 
 //read todo in firebase
 
-useEffect( () => {
+useEffect(() => {
     const getData = async () => {
-        
-        const  uid = await user.uid; //from context of user object
-    console.log(uid);
-    
-        const q = await query(collection(db,'userData', uid, 'todos'));
-        const  unsubscribe =   onSnapshot(q, (querySnapshot) => {
-            let todosArr = [];
-            querySnapshot.forEach((doc) => {
-              todosArr.push({...doc.data(), id: doc.id})
-            });
-            setTodos(todosArr)
-          });
-          return () => unsubscribe();
-    }
-       getData();
-
-    
-   return () => {
-    if(user.id===!null) return
-       
-   }
-    
-    }, [user.uid]);
+      if (!user || !user.uid) {
+        return; // Exit early if user or user.uid is undefined or null
+      }
+  
+      const uid = user.uid;
+      console.log(uid);
+  
+      const q = query(collection(db, 'userData', uid, 'todos'));
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        let todosArr = [];
+        querySnapshot.forEach((doc) => {
+          todosArr.push({ ...doc.data(), id: doc.id });
+        });
+        setTodos(todosArr);
+      });
+  
+      return () => unsubscribe();
+    };
+  
+    getData();
+  
+    return () => {
+      // You may not need this part depending on your use case
+      if (user?.uid === null) return;
+    };
+  }, [user]);
+  
 
 
 //update todo in firebase

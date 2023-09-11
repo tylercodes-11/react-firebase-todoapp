@@ -22,7 +22,7 @@ const Login = () => {
         } else {
             navigate('/');
         }
-    },[user])
+    },[navigate, user])
 
     return (
     <section className="bg-gray-50 min-h-screen flex items-center justify-center
@@ -36,7 +36,7 @@ const Login = () => {
           <div className="md:w-1/2 px-16">
           <h2 className="font-bold text-3xl mb-10">Welcome to the Todo App</h2> 
 
-           
+           {/*  */}
          <button className="bg-white border py-2 px-3 w-full rounded-xl mt-7 flex justify-center items-center text-m"  onClick={handleGoogleSignIn}>
             {/* google svg */}
          <svg className="mr-3" viewBox="0 0 48 48" width="50px" height="50px">
