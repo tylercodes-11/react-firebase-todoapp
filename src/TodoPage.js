@@ -21,6 +21,11 @@ function TodoPage() {
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState('');
 
+  //testing compenent end render function
+  useEffect(() => {
+    console.log('Login Component Mounted');
+    // ... other component logic
+  }, []);
 
   //signout handle
 const handleSignOut = async () => {
@@ -53,6 +58,7 @@ const createTodo = async (e) => {
 //read todo in firebase
 
 useEffect(() => {
+
     const getData = async () => {
       if (!user || !user.uid) {
         return; // Exit early if user or user.uid is undefined or null
@@ -109,12 +115,12 @@ const deleteTodo = async (id) => {
         {/*  */}
         {/*  */}
       
-           <img onClick={handleSignOut} className={style.profile} src={user.photoURL} alt="Account Photo"></img> 
+           <img onClick={handleSignOut} className={style.profile} src={user.photoURL} alt="Sign Out"></img> 
         
 
       <div className={style.container}>
    
-        <h3 className={style.heading}>Todo List</h3>
+        <h3 className={style.heading}>To Do List</h3>
         <form onSubmit={createTodo} className={style.form}>
           <input 
           value={input} 
@@ -135,7 +141,7 @@ const deleteTodo = async (id) => {
           ))}
 
           </ul>
-          {todos.length < 1 ? null :  <p className={style.count}> You have {todos.length} todos</p> }
+          {todos.length < 1 ? null :  <p className={style.count}>{`You have ${todos.length} todos`}</p> }
         
           
       </div>

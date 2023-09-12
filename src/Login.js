@@ -1,7 +1,7 @@
 import {React, useEffect } from "react";
 import { UserAuth} from "./context/AuthContext";
 import {useNavigate} from 'react-router-dom';
-import mountainimage from './images/mountain-image.jpeg';
+import todopic from './images/todopic.jpeg';
 
 
 
@@ -16,13 +16,13 @@ const Login = () => {
             console.log(err);
         }
     }
-    useEffect(() => {
-        if (user != null) {
-            navigate('/todos');
-        } else {
-            navigate('/');
-        }
-    },[navigate, user])
+    // useEffect(() => {
+    //     if (user !== null) {
+    //         navigate('/todos');
+    //     } else {
+    //         navigate('/');
+    //     }
+    // },[navigate, user])
 
     return (
     <section className="bg-gray-50 min-h-screen flex items-center justify-center
@@ -34,7 +34,9 @@ const Login = () => {
     {/* form container */}
     
           <div className="md:w-1/2 px-16">
-          <h2 className="font-bold text-3xl mb-10">Welcome to Todo Pro</h2> 
+          <h2 className="font-bold text-3xl mb-10">Welcome to  
+          <br/>
+          To Do Pro</h2> 
 
            {/*  */}
          <button className="bg-white border py-2 px-3 w-full rounded-xl mt-7 flex justify-center items-center text-m"  onClick={handleGoogleSignIn}>
@@ -56,7 +58,7 @@ const Login = () => {
             </div>
     {/* image */}
         <div className="w-1/2 ">
-            <img className="rounded-2xl" src={mountainimage} alt="naturephoto" />
+            <img className="rounded-2xl" src={todopic} alt="todolist" />
         </div>
     </div>
     </section>

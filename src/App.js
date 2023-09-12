@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, useLocation } from "react-router-dom"
 import Login from "./Login";
 import TodoPage from "./TodoPage";
 import { AuthContextProvider } from './context/AuthContext'
@@ -9,6 +9,9 @@ import Protected from "./Protected";
 
 
 function App() {
+  const location = useLocation();
+  console.log("Current Location:", location.pathname);
+
 ////////////////////////////////
   return (
 //making routes for login and todo page
@@ -16,12 +19,14 @@ function App() {
    
         <AuthContextProvider> 
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/todos" element={
+        <Route path="/" element={<Login  />} exact />
+        <Route path="/todos" element={
           <Protected>
             <TodoPage />
             </Protected>}
              />
+          
+         
           </Routes>
          </AuthContextProvider>
       
