@@ -1,4 +1,4 @@
-# React.js To-Do App with Firebase Authentication and Firestore
+# React.js To-Do App with Firebase Authentication and Cloud Storage
 
 Welcome to my React.js To-Do App, a dynamic and secure task manager powered by Firebase Google Authentication and real-time Firestore cloud storage. This project demonstrates my proficiency as a junior developer in building modern, secure and responsive web applications.
 
