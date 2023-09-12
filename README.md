@@ -33,7 +33,7 @@ Welcome to my React.js To-Do App, a dynamic and secure task manager powered by F
    ```
    npm start
    ```
-
+##
    <img width="967" alt="Screenshot 2023-09-12 at 3 15 43 PM" src="https://github.com/tylercodes-11/react-firebase-todoapp/assets/96836274/edb30aa0-fc36-41b5-bac7-89bc40291d33">
 
 
