@@ -22,10 +22,10 @@ function TodoPage() {
   const [input, setInput] = useState('');
 
   //testing compenent end render function
-  useEffect(() => {
-    console.log('Login Component Mounted');
-    // ... other component logic
-  }, []);
+  // useEffect(() => {
+  //   console.log('Login Component Mounted');
+  //   // ... other component logic
+  // }, []);
 
   //signout handle
 const handleSignOut = async () => {
@@ -65,7 +65,7 @@ useEffect(() => {
       }
   
       const uid = user.uid;
-      console.log(uid);
+      // console.log(uid);
   
       const q = query(collection(db, 'userData', uid, 'todos'));
       const unsubscribe = onSnapshot(q, (querySnapshot) => {

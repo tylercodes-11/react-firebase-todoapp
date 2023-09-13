@@ -9,8 +9,8 @@ import Protected from "./Protected";
 
 
 function App() {
-  const location = useLocation();
-  console.log("Current Location:", location.pathname);
+  // const location = useLocation();
+  // console.log("Current Location:", location.pathname);
 
 ////////////////////////////////
   return (
