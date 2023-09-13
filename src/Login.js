@@ -16,13 +16,13 @@ const Login = () => {
             console.log(err);
         }
     }
-    // useEffect(() => {
-    //     if (user !== null) {
-    //         navigate('/todos');
-    //     } else {
-    //         navigate('/');
-    //     }
-    // },[navigate, user])
+    useEffect(() => {
+        if (user !== null) {
+            navigate('/todos');
+        } else {
+            navigate('/');
+        }
+    },[navigate, user])
 
     return (
     <section className="bg-gray-50 min-h-screen flex items-center justify-center
@@ -31,7 +31,7 @@ const Login = () => {
         <div  className="bg-gray-100 flex rounded-2xl shadow-lg p-5 max-w-3xl items-center">
                 {/* welcome title */}
 
-    {/* form container */}
+    
     
           <div className="md:w-1/2 px-16">
           <h2 className="font-bold text-3xl mb-10">Welcome to  
